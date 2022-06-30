@@ -114,7 +114,7 @@ export const Navbar: FC = () => {
         }}
       >
         <MenuItem onClick={handleClose}>
-          <LinkRRD to="/admin/clients/">
+          <LinkRRD to="/admin/clients/" className="withoutUnderline">
             <Link
               display="flex"
               alignItems="center"

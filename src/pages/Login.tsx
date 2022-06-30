@@ -8,6 +8,7 @@ import authApi from '../api/authApi';
 import { ErrorOutline } from '@mui/icons-material';
 import { AuthContext } from '../context/auth/AuthContext';
 import { Link as LinkRRD, useNavigate } from 'react-router-dom';
+import GetOut from '../components/ui/GetOut';
 
 type FormData = {
     email: string,
@@ -39,14 +40,7 @@ const Login = () => {
 
   return (
       <>
-        <Box style={{ margin: '20px 50px' }}>
-            <LinkRRD to='/'>
-                <Link display='flex' alignItems='center' style={{ cursor: 'pointer' }}>
-                    <ArrowBackIcon />
-                    <Typography variant='h6' >Volver</Typography>
-                </Link>
-            </LinkRRD>
-        </Box>
+        <GetOut />
         <AuthLayout>
             <form onSubmit={ handleSubmit(onLoginUser) } noValidate>
                 <Box sx={{ width: 350, padding: '10px 20px' }}>

@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react'
 import AuthLayout from '../components/layouts/AuthLayout';
 import { Box, Button, Chip, Grid, Link, TextField, Typography } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useForm } from 'react-hook-form';
 import { validations } from '../utils';
-import authApi from '../api/authApi';
 import { ErrorOutline } from '@mui/icons-material';
 import { AuthContext } from '../context/auth/AuthContext';
 import { Link as LinkRRD, useNavigate } from 'react-router-dom';
+import GetOut from '../components/ui/GetOut';
 
 
 type FormData ={
@@ -43,15 +42,7 @@ const SignIn = () => {
 
   return (
     <>
-        <Box style={{ margin: '20px 50px' }}>
-            <LinkRRD to='/'>
-                <Link display='flex' alignItems='center' style={{ cursor: 'pointer' }}>
-                    <ArrowBackIcon />
-                    <Typography variant='h6' >Volver</Typography>
-                    
-                </Link>
-            </LinkRRD>
-        </Box>
+        <GetOut />
         <AuthLayout>
             <form onSubmit={ handleSubmit(onRegisterForm) } noValidate>
                 <Box sx={{ width: 350, padding: '10px 20px' }}>

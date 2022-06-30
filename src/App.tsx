@@ -18,6 +18,8 @@ const App = () => {
           <Route path='/auth/login' element={ <Login /> } />
           <Route path='/auth/signIn' element={ <SignIn /> } />
           <Route path='/admin/welcome' element={ <Welcome /> } />
+
+          <Route path='/*' element={ <Home /> } />
         </Routes>
       </BrowserRouter>
     </>

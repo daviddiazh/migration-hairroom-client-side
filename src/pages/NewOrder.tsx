@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import {
   Avatar,
+  Badge,
   Box,
   Button,
   capitalize,
@@ -99,13 +100,13 @@ const NewOrder = () => {
                 <form onSubmit={handleSubmit(onSaveData)} noValidate>
                 <Box sx={{ width: 350, padding: "10px 20px", margin: "0 auto" }}>
                     <Typography
-                    variant="h2"
-                    fontWeight={600}
-                    fontSize="30px"
-                    textAlign="center"
-                    marginBottom={1}
+                        variant="h2"
+                        fontWeight={600}
+                        fontSize="30px"
+                        textAlign="center"
+                        marginBottom={1}
                     >
-                    Registro de órdenes
+                        Registro de órdenes
                     </Typography>
                     <Typography
                     variant="h6"
@@ -113,8 +114,8 @@ const NewOrder = () => {
                     fontSize="23px"
                     textAlign="center"
                     marginBottom={8}
-                    >
-                    Datos personales
+                    >   
+                        Datos personales
                     </Typography>
                     <Box
                     sx={{
