@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { FormDetailsOrder } from './pages/FormDetailsOrder'
 import Home from './pages/Home'
@@ -6,8 +6,12 @@ import Login from './pages/Login'
 import NewOrder from './pages/NewOrder'
 import SignIn from './pages/SignIn'
 import { Welcome } from './pages/Welcome'
+import { AuthContext } from './context/auth/AuthContext';
 
 const App = () => {
+
+  const { isLoggedIn } = useContext( AuthContext )
+
   return (
     <>
       <BrowserRouter>
@@ -17,9 +21,15 @@ const App = () => {
           <Route path='/formDetailsOrder' element={ <FormDetailsOrder /> } />
           <Route path='/auth/login' element={ <Login /> } />
           <Route path='/auth/signIn' element={ <SignIn /> } />
-          <Route path='/admin/welcome' element={ <Welcome /> } />
 
           <Route path='/*' element={ <Home /> } />
+
+          {
+            isLoggedIn 
+            ? <Route path='/admin/welcome' element={ <Welcome /> } />
+            : <Route path='/' element={ <Home /> } />
+            
+          }
         </Routes>
       </BrowserRouter>
     </>
