@@ -1,4 +1,4 @@
-import React, { FC, useContext } from "react";
+import React, { FC, useContext, useEffect } from "react";
 import { Link as LinkRRD } from 'react-router-dom'
 import {
   AppBar,
@@ -18,31 +18,37 @@ import MenuItem from '@mui/material/MenuItem';
 import ListIcon from '@mui/icons-material/List';
 import { AuthContext } from "../../context/auth";
 import { LoginOutlined, ShoppingCartOutlined } from "@mui/icons-material";
+import imagePath from '../../images/Logo.png';
+
 
 export const Navbar: FC = () => {
   const { user, isLoggedIn, logout } = useContext(AuthContext);
 
-  const imagePath = `/images/Logo.png`;
-
+  
   const onLogout = () => {
-
+    
     logout()
-
+    
     //router.replace('/auth/autentication');
     window.location.reload();
-
+    
   }
-
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-      setAnchorEl(null);
-    };
   
-
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  
+  // useEffect(() => {
+  //   if( localStorage.getItem('token') !== undefined && !user ){
+  //     console.log('GUARDANDO EL TOKEN')
+  //   }
+  // }, [])
+  
   return (
     <AppBar>
       <Toolbar>
@@ -78,7 +84,7 @@ export const Navbar: FC = () => {
               sx={{ bgcolor: '#fff' }}
             >
                 <Avatar src={user?.name} alt={ user?.name } sx={{ bgcolor: 'secondary.main', width: 30, height: 30 }}></Avatar>   
-                <Typography color='black' alignItems='center' marginLeft={1} fontWeight={500}>{user?.name.split(' ')[0]}</Typography>
+                <Typography color='black' alignItems='center' marginLeft={1} fontWeight={500}>{user?.name!.split(' ')[0]}</Typography>
               </Button>
             </>
 

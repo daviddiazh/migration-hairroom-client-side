@@ -4,6 +4,7 @@ import { OrderContext, orderReducer } from './';
 import authApi from '../../api/authApi';
 import { useSnackbar } from 'notistack';
 import { AuthContext } from '../auth';
+import ordersApi from '../../api/ordersApi';
 
 export interface OrdersState{
     orders: Order[];
@@ -31,7 +32,9 @@ export const OrderProvider: React.FC<any> = ({ children }) => {
         price: number,
         paymentMethod: string, ) => {
 
-        const { data } = await authApi.post<Order>('/createOrder', { name, lastName, phone, email, numberIdentification, typeIdentification, service, product, price, paymentMethod, });
+        console.log(name, lastName, phone, email, numberIdentification, typeIdentification, service, product, price, paymentMethod,)
+
+        const { data } = await ordersApi.post<Order>('/createOrder', { name, lastName, phone, email, numberIdentification, typeIdentification, service, product, price, paymentMethod, });
         dispatch({ type: 'Orders - AddNewOrder', payload: data })
 
         enqueueSnackbar('Órden agregada correctamente!', {

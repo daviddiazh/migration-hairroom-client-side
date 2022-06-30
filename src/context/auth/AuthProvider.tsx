@@ -24,24 +24,28 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
 
     const checkToken = async () => {
 
-        if( !localStorage.getItem('token') ){
+        if( !localStorage.getItem('TOKEN-USER') ){
             return;
         }
 
         const config = {
             headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-                'x-token': `${localStorage.getItem('token')}`,
+                Authorization: `Bearer ${localStorage.getItem('TOKEN-USER')}`,
+                'x-token': `${localStorage.getItem('TOKEN-USER')}`,
             }
         }
 
         try {
+            console.log('dentro del trycatch')
             const { data } = await authApi.get('/validate-token', config);
-            const { token, user } = data;
-            localStorage.setItem('token', token);
-            dispatch({ type: 'Auth - Login', payload: user });
+            const { name, role } = data;
+            console.log('data: ', data)
+            //localStorage.setItem('token', token);
+            //localStorage.setItem('TOKEN-USER', token);
+            dispatch({ type: 'Auth - Login', payload: {name, role} });
         } catch (error) {
-            localStorage.removeItem('token');
+            //localStorage.removeItem('token');
+            console.log(error)
         }
     }
     
@@ -50,11 +54,10 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
 
         try {
             const { data } = await authApi.post('/login', { email, password } );
-            console.log('DATA: ', data)
             const { token, user } = data;  
-            console.log('USER EN EL ENDPOINT: ', user)
-            localStorage.setItem('token', token);
             dispatch({ type: 'Auth - Login', payload: user });
+            localStorage.setItem('token', token);
+            localStorage.setItem('TOKEN-USER', token);
             return true;
         } catch (error) {
             return false;
@@ -68,6 +71,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
             const { data } = await authApi.post('/signIn', { name, email, password });
             const { token, user } = data;
             localStorage.setItem('token', token);
+            localStorage.setItem('TOKEN-USER', token);
             dispatch({ type: 'Auth - Login', payload: user });
             return {
                 hasError: false,
@@ -90,7 +94,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
     }
 
     const logout = () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('TOKEN-USER');
         //router.reload();
     }
 
@@ -100,6 +104,7 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
             ...state, 
 
             //Methods
+            checkToken,
             loginUser,
             registerUser,
             logout,
