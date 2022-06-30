@@ -90,7 +90,7 @@ export const Navbar: FC = () => {
 
           ) : (
             <Box style={{ marginTop: "7px" }}>
-              <LinkRRD to="/new">
+              <LinkRRD to="/newOrder" className="withoutUnderline">
                 <Link style={{ cursor: "pointer" }}>
                   Pedido
                   <IconButton>

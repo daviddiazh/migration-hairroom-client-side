@@ -24,13 +24,13 @@ const Home = () => {
           height='calc(100vh - 285px)'
           sx={{ flexDirection: { xs: 'column', sm: 'row' } }}    
         >
-          <LinkRRD to='/newOrder'>
+          <LinkRRD to='/newOrder' className='withoutUnderline'>
             <Link display='flex' alignItems='center' style={{ cursor: 'pointer' }}>
               <Typography variant='h1' color='secondary' fontSize={50} fontWeight={200}>Soy Cliente |</Typography>
             </Link>
           </LinkRRD>
-          <LinkRRD to='/auth/login'>
-            <Link display='flex' alignItems='center' style={{ cursor: 'pointer', marginLeft: 10 }}>
+          <LinkRRD to='/auth/login' className='withoutUnderline'>
+            <Link display='flex' alignItems='center' style={{ cursor: 'pointer', marginLeft: 10 }} >
               <Typography variant='h1' fontSize={50} fontWeight={200}>Soy Admin</Typography>
             </Link>
           </LinkRRD>

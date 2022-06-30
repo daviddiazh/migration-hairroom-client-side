@@ -26,6 +26,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link as LinkRRD } from 'react-router-dom';
 import { validations } from "../utils";
 import { useEffect } from 'react';
+import GetOut from "../components/ui/GetOut";
 
 
 type FormData = {
@@ -130,18 +131,7 @@ export const FormDetailsOrder = () => {
 
   return (
     <div>
-      <Box style={{ margin: "20px 50px" }}>
-        <LinkRRD to="/">
-          <Link
-            display="flex"
-            alignItems="center"
-            style={{ cursor: "pointer" }}
-          >
-            <ArrowBackIcon />
-            <Typography variant="h6">Volver</Typography>
-          </Link>
-        </LinkRRD>
-      </Box>
+      <GetOut />
       <LayoutOrders>
         <form onSubmit={ handleSubmit(onSaveData) }>
           <Box sx={{ width: 350, padding: "10px 20px", margin: "0 auto" }}>

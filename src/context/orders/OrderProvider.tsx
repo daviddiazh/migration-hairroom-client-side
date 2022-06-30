@@ -39,7 +39,7 @@ export const OrderProvider: React.FC<any> = ({ children }) => {
 
         enqueueSnackbar('Órden agregada correctamente!', {
             variant: 'success',
-            autoHideDuration: 2000,
+            autoHideDuration: 3000,
             anchorOrigin: {
                 vertical: 'top',
                 horizontal: 'right'
@@ -48,14 +48,6 @@ export const OrderProvider: React.FC<any> = ({ children }) => {
 
         return data;
     }
-
-    // const updateClient = async () => {
-
-    // }
-
-    // const deleteClient =  async () => {
-        
-    // } //TODO: Estas funciones deben ir?
 
     const refreshOrders = async () => {
 
