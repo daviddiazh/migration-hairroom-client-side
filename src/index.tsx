@@ -9,6 +9,7 @@ import { SnackbarProvider } from 'notistack';
 import { AuthProvider } from './context/auth';
 import { OrderProvider } from './context/orders';
 
+
 ReactDOM.render(  
   <AuthProvider>
     <SnackbarProvider maxSnack={3}>
