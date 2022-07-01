@@ -49,27 +49,27 @@ export const OrderProvider: React.FC<any> = ({ children }) => {
         return data;
     }
 
-    const refreshOrders = async () => {
+    // const refreshOrders = async () => {
 
-        console.log('USER: ', user);
+    //     console.log('USER: ', user);
 
-        const config = {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-                'x-token': `${localStorage.getItem('token')}`,
-            }
-        }
+    //     const config = {
+    //         headers: {
+    //             Authorization: `Bearer ${localStorage.getItem('TOKEN-USER')}`,
+    //             'x-token': `${localStorage.getItem('TOKEN-USER')}`,
+    //         }
+    //     }
 
-        if( user?.role === 'admin' ){
-            const { data } = await authApi.get<Order[]>('/getOrders', config);
-            dispatch({ type: 'Orders - RefreshData', payload: data });
-        }
+    //     if( user?.role === 'admin' ){
+    //         const { data } = await authApi.get<Order[]>('/getOrders', config);
+    //         dispatch({ type: 'Orders - RefreshData', payload: data });
+    //     }
 
-    }
+    // }
 
-    useEffect(() => {
-        refreshOrders();
-    }, [])
+    // useEffect(() => {
+    //     refreshOrders();
+    // }, [])
     
 
     return (

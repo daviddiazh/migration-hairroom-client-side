@@ -340,6 +340,7 @@ import { orderReducer, ORDERS_INITIAL_STATE } from "../context/orders";
 import GetOut from "../components/ui/GetOut";
 
 import ReactExport from 'react-data-export';
+import useState from 'react';
 
 
 interface Column {
@@ -468,7 +469,9 @@ const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 
 
 const Orders = () => {
-  const { orders } = useContext(OrderContext);
+  //const { orders } = useContext(OrderContext);
+  //console.log('Las ordenes son: ', orders)
+  const [ orders, setOrders ] = React.useState<Order[]>([]);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -483,6 +486,7 @@ const Orders = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
 
   const rows = orders.map((order) => {
     return createData(
@@ -507,35 +511,27 @@ const Orders = () => {
   const { user } = useContext( AuthContext );
   const [ state, dispatch ] = useReducer(orderReducer, ORDERS_INITIAL_STATE);
 
-  // const refreshClients = async () => {
-
-  //   if( true ){ //user?.role === 'admin'
-  //       const { data } = await ordersApi.get<Order[]>('/getOrders');
-  //       dispatch({ type: 'Orders - RefreshData', payload: data });
-  //   }
-
-  // }
-
   const refreshOrders = async () => {
 
     console.log('USER: ', user);
 
     const config = {
         headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            'x-token': `${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem('TOKEN-USER')}`,
+            'x-token': `${localStorage.getItem('TOKEN-USER')}`,
         }
     }
 
-    if( user?.role === 'admin' ){
+    if( user?.role === 'admin' || localStorage.getItem('TOKEN-USER') ){
         const { data } = await ordersApi.get<Order[]>('/getOrders', config);
+        console.log('DATA', data)
         dispatch({ type: 'Orders - RefreshData', payload: data });
+        setOrders(data);
     }
 
-}
+  }
 
   const { isLoggedIn } = useContext(AuthContext);
-  const {  } = useContext(OrderContext);
 
   useEffect(() => {
     refreshOrders();
@@ -608,7 +604,7 @@ const Orders = () => {
               <Box flex={1} />
 
                 {
-                  orders.length >= 0 ? (
+                  orders.length >= 1 ? (
                     <ExcelFile
                       filename="Ordenes" 
                       element={<button type="button" className="">Export Data</button>}

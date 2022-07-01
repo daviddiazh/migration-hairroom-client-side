@@ -11,6 +11,7 @@ export const orderReducer = ( state: OrdersState, action: OrderActionTypes ): Or
 
     switch( action.type ){
        case 'Orders - RefreshData':
+            console.log('PAYLOAD: ', action.payload)
            return {
                ...state,
                orders: [ ...action.payload ]
