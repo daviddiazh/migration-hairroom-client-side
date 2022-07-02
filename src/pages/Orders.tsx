@@ -272,7 +272,7 @@ const Orders = () => {
     <>
       <GetOut />
       {
-        isLoggedIn ? (
+        isLoggedIn && user?.role === 'admin' ? (
           <>
             <Box display='flex'>
               <Button onClick={onClick}>Exportar</Button>

@@ -36,18 +36,6 @@ const App = () => {
             </ProtectedRoute>
           } />
 
-          {/* <Route path='/admin/welcome' element={
-            <Welcome />
-          } />
-          <Route path='/admin/orders' element={
-            <Orders />
-          } /> */}
-
-          {/* <Route path='/private' element={ <ProtectedRoute /> }>
-            <Route path='/admin/welcome' element={ <Welcome /> } />
-            <Route path='/admin/orders' element={ <Orders /> } />
-          </Route> */}
-
           <Route path='/*' element={ <Home /> } />
         </Routes>
       </BrowserRouter>

@@ -8,7 +8,6 @@ export const ProtectedRoute = ({ children }) => {
     const token = localStorage.getItem('TOKEN-USER')
 
     if( !token ){
-
         return <Navigate to='/' /> 
     }
 
