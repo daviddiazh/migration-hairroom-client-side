@@ -7,7 +7,7 @@ import { validations } from '../utils';
 import authApi from '../api/authApi';
 import { ErrorOutline } from '@mui/icons-material';
 import { AuthContext } from '../context/auth/AuthContext';
-import { Link as LinkRRD, useNavigate } from 'react-router-dom';
+import { Link as LinkRRD, Navigate, useNavigate } from 'react-router-dom';
 import GetOut from '../components/ui/GetOut';
 
 type FormData = {
@@ -18,7 +18,7 @@ type FormData = {
 const Login = () => {
 
     const navigate = useNavigate();
-    const { loginUser } = useContext( AuthContext );
+    const { loginUser, isLoggedIn, user } = useContext( AuthContext );
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
     const [showError, setShowError] = useState(false);
 
@@ -41,86 +41,92 @@ const Login = () => {
   return (
       <>
         <GetOut />
-        <AuthLayout>
-            <form onSubmit={ handleSubmit(onLoginUser) } noValidate>
-                <Box sx={{ width: 350, padding: '10px 20px' }}>
-                    <Grid container spacing={ 2 }>
-                        <Grid item>
-                            <Typography variant='h1' component='h1'>Iniciar Sesión</Typography>
-                            <Chip 
-                                label='Correo o Contraseña no válidos'
-                                color='error'
-                                icon={ <ErrorOutline />}
-                                className='fadeIn'
-                                sx={{ display: showError ? 'flex' : 'none' }}
-                                style={{ margin: '10px 0' }}
-                            />
-                        </Grid>
+        {
+            localStorage.getItem('TOKEN-USER') 
+            ? <Navigate to='/' /> 
+            : (
+                <AuthLayout>
+                    <form onSubmit={ handleSubmit(onLoginUser) } noValidate>
+                        <Box sx={{ width: 350, padding: '10px 20px' }}>
+                            <Grid container spacing={ 2 }>
+                                <Grid item>
+                                    <Typography variant='h1' component='h1'>Iniciar Sesión</Typography>
+                                    <Chip 
+                                        label='Correo o Contraseña no válidos'
+                                        color='error'
+                                        icon={ <ErrorOutline />}
+                                        className='fadeIn'
+                                        sx={{ display: showError ? 'flex' : 'none' }}
+                                        style={{ margin: '10px 0' }}
+                                    />
+                                </Grid>
 
-                        <Grid item xs={ 12 }>
-                            <TextField 
-                                autoComplete='off'
-                                type='email'
-                                label='Correo Eléctronico' 
-                                variant='filled' 
-                                fullWidth 
-                                { 
-                                    ...register('email', {
-                                        required: 'Este campo es requerido',
-                                        validate: ( value ) => validations.isEmail(value)
-                                    })}
-                                error={ !!errors.email }
-                                helperText={ errors.email?.message }
-                            />
-                        </Grid>
-                        <Grid item xs={ 12 }>
-                            <TextField 
-                                type='password'
-                                label='Contraseña' 
-                                variant='filled' 
-                                fullWidth 
-                                { 
-                                    ...register('password', { 
-                                        required: 'Este campo es requerido', 
-                                        minLength: { value: 6, message: 'La contraseña debe contener mínimo 6 caracteres' 
-                                    }})}
-                                error={ !!errors.password }
-                                helperText={ errors.password?.message }
-                            />
-                        </Grid>
+                                <Grid item xs={ 12 }>
+                                    <TextField 
+                                        autoComplete='off'
+                                        type='email'
+                                        label='Correo Eléctronico' 
+                                        variant='filled' 
+                                        fullWidth 
+                                        { 
+                                            ...register('email', {
+                                                required: 'Este campo es requerido',
+                                                validate: ( value ) => validations.isEmail(value)
+                                            })}
+                                        error={ !!errors.email }
+                                        helperText={ errors.email?.message }
+                                    />
+                                </Grid>
+                                <Grid item xs={ 12 }>
+                                    <TextField 
+                                        type='password'
+                                        label='Contraseña' 
+                                        variant='filled' 
+                                        fullWidth 
+                                        { 
+                                            ...register('password', { 
+                                                required: 'Este campo es requerido', 
+                                                minLength: { value: 6, message: 'La contraseña debe contener mínimo 6 caracteres' 
+                                            }})}
+                                        error={ !!errors.password }
+                                        helperText={ errors.password?.message }
+                                    />
+                                </Grid>
 
-                        <Grid item xs={ 12 }>
-                            <Button 
-                                className='circular-btn' 
-                                size='large' 
-                                fullWidth
-                                type='submit'
-                                sx={{ backgroundColor: 'secondary.main',
-                                    '&:hover': {
-                                        backgroundColor: 'info.main',
-                                    }, 
-                                }}
-                            >
-                                Ingresar
-                            </Button>
-                        </Grid>
-                        
-                        <Box sx={{ display: 'flex', justifyContent: 'space-around', margin: '1rem .5rem', paddingLeft: '1rem'}}>
-                            <hr style={{ width: '135px', height: '2px', margin: 'auto 0' }} />
-                            <Typography sx={{padding: '0 .5rem'}}>O</Typography>
-                            <hr style={{ width: '135px', height: '2px', margin: 'auto 0' }} />
+                                <Grid item xs={ 12 }>
+                                    <Button 
+                                        className='circular-btn' 
+                                        size='large' 
+                                        fullWidth
+                                        type='submit'
+                                        sx={{ backgroundColor: 'secondary.main',
+                                            '&:hover': {
+                                                backgroundColor: 'info.main',
+                                            }, 
+                                        }}
+                                    >
+                                        Ingresar
+                                    </Button>
+                                </Grid>
+                                
+                                <Box sx={{ display: 'flex', justifyContent: 'space-around', margin: '1rem .5rem', paddingLeft: '1rem'}}>
+                                    <hr style={{ width: '135px', height: '2px', margin: 'auto 0' }} />
+                                    <Typography sx={{padding: '0 .5rem'}}>O</Typography>
+                                    <hr style={{ width: '135px', height: '2px', margin: 'auto 0' }} />
+                                </Box>
+                                <Grid item xs={ 12 } sx={{ marginTop: '-1.3rem'}} textAlign='center'>
+                                    <LinkRRD to='/auth/signIn'>
+                                        <Link style={{ cursor: 'pointer' }} underline='always' >
+                                            <Typography variant='body1' >¿No tienes cuenta? ¡Crea una gratis!</Typography>
+                                        </Link>
+                                    </LinkRRD>
+                                </Grid>
+                            </Grid>
                         </Box>
-                        <Grid item xs={ 12 } sx={{ marginTop: '-1.3rem'}} textAlign='center'>
-                            <LinkRRD to='/auth/signIn'>
-                                <Link style={{ cursor: 'pointer' }} underline='always' >
-                                    <Typography variant='body1' >¿No tienes cuenta? ¡Crea una gratis!</Typography>
-                                </Link>
-                            </LinkRRD>
-                        </Grid>
-                    </Grid>
-                </Box>
-            </form>
-        </AuthLayout>
+                    </form>
+                </AuthLayout>
+            )
+        }
       </>
     
   )

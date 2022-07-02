@@ -339,8 +339,9 @@ import ordersApi from "../api/ordersApi";
 import { orderReducer, ORDERS_INITIAL_STATE } from "../context/orders";
 import GetOut from "../components/ui/GetOut";
 
-import ReactExport from 'react-data-export';
-import useState from 'react';
+import ReactExport from '../modules/types/react-data.export';
+import ExcelFile from '../modules/types/react-data.export';
+import ExcelSheet from '../modules/types/react-data.export';
 
 
 interface Column {
@@ -408,7 +409,6 @@ const columns: readonly Column[] = [
     label: "Precio",
     minWidth: 20,
     align: "right",
-    format: (value: number) => value.toFixed(2),
   },
   {
     id: "paymentMethod",
@@ -464,8 +464,7 @@ interface Props {
   order: Order;
 }
 
-const ExcelFile = ReactExport.ExcelFile;
-const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
+
 
 
 const Orders = () => {
@@ -598,7 +597,7 @@ const Orders = () => {
         isLoggedIn //&& user!.role === 'admin'
         ? (
           <>
-            <Box display='flex'>
+            {/* <Box display='flex'>
               <Box></Box>
 
               <Box flex={1} />
@@ -609,11 +608,11 @@ const Orders = () => {
                       filename="Ordenes" 
                       element={<button type="button" className="">Export Data</button>}
                     >
-                      <ExcelSheet dataSet={dataOrders} name="Ordenes Sheet" />
+                      <ExcelSheet dataSet={[]} name="Ordenes Sheet" />
                     </ExcelFile>
                   ) : null
                 }
-            </Box>
+            </Box> */}
             
             <Paper sx={{ width: '95%', margin: '0 auto', overflow: 'hidden' }}>
               <TableContainer sx={{ maxHeight: '75%' }}>
@@ -681,5 +680,3 @@ const Orders = () => {
 
 
 export default Orders;
-
-

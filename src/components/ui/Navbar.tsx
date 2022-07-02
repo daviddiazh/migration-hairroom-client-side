@@ -1,5 +1,5 @@
 import React, { FC, useContext, useEffect } from "react";
-import { Link as LinkRRD } from 'react-router-dom'
+import { Link as LinkRRD, useNavigate } from 'react-router-dom'
 import {
   AppBar,
   Avatar,
@@ -23,13 +23,14 @@ import imagePath from '../../images/Logo.png';
 
 export const Navbar: FC = () => {
   const { user, isLoggedIn, logout } = useContext(AuthContext);
+  //let navigate = useNavigate()
 
   
   const onLogout = () => {
     
     logout()
     
-    //router.replace('/auth/autentication');
+    // navigate('/');
     window.location.reload();
     
   }
