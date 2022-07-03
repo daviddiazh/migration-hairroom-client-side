@@ -8,13 +8,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { OrderContext } from "../context/orders/OrderContext";
 import { Order } from "../interfaces/Order";
 import { Box, Button, Icon, Link, Typography } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { v4 as uuidv4 } from "uuid";
 import { AuthContext } from '../context/auth/AuthContext';
-import FileDownloadIcon from '@mui/icons-material/FileDownload';
 import { Footer } from "../components/ui/Footer";
 import ordersApi from "../api/ordersApi";
 import { orderReducer, ORDERS_INITIAL_STATE } from "../context/orders";
@@ -183,7 +180,6 @@ function crearFila(
 
 
 const Orders = () => {
-  //const { orders } = useContext(OrderContext);
   const [ orders, setOrders ] = React.useState<Order[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -260,7 +256,7 @@ const Orders = () => {
     refreshOrders();
   }, [])
 
-  const onClick = (e) => {
+  const onDownloadXlsx = (e) => {
     e.preventDefault()
     let workBook = XLSX.utils.book_new()
     let workSheet = XLSX.utils.json_to_sheet(filas)
@@ -278,8 +274,9 @@ const Orders = () => {
             <Box display='flex' justifyContent='space-between' margin='17px 2.5em'>
               <Box></Box>
 
-              <Button color='success' onClick={onClick} sx={{padding: '5px 30px', color: '#fff', fontSize: '16px'}}>Exportar {<DownloadIcon />}</Button>
+              <Button color='success' onClick={onDownloadXlsx} sx={{padding: '5px 30px', color: '#fff', fontSize: '16px'}}>Exportar {<DownloadIcon />}</Button>
             </Box>
+
             <Paper sx={{ width: '97%', margin: '0 auto', overflow: 'hidden' }}>
               <TableContainer sx={{ maxHeight: '75%' }}>
                 <Table stickyHeader aria-label="sticky table">
