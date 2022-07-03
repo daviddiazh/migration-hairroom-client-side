@@ -20,6 +20,7 @@ import ordersApi from "../api/ordersApi";
 import { orderReducer, ORDERS_INITIAL_STATE } from "../context/orders";
 import GetOut from "../components/ui/GetOut";
 import * as XLSX from "xlsx";
+import DownloadIcon from '@mui/icons-material/Download';
 
 
 interface Column {
@@ -274,10 +275,12 @@ const Orders = () => {
       {
         isLoggedIn && user?.role === 'admin' ? (
           <>
-            <Box display='flex'>
-              <Button onClick={onClick}>Exportar</Button>
+            <Box display='flex' justifyContent='space-between' margin='17px 2.5em'>
+              <Box></Box>
+
+              <Button color='success' onClick={onClick} sx={{padding: '5px 30px', color: '#fff', fontSize: '16px'}}>Exportar {<DownloadIcon />}</Button>
             </Box>
-            <Paper sx={{ width: '95%', margin: '0 auto', overflow: 'hidden' }}>
+            <Paper sx={{ width: '97%', margin: '0 auto', overflow: 'hidden' }}>
               <TableContainer sx={{ maxHeight: '75%' }}>
                 <Table stickyHeader aria-label="sticky table">
                   <TableHead>
