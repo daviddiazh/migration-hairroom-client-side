@@ -9,10 +9,10 @@ export const lightTheme = createTheme({
       main: '#1E1E1E'
     },
     secondary: {
-      main: '#3A64D8',
+      main: '#54acde',
     },
     info: {
-      main: '#274494',
+      main: '#409cd1',
     },
     success: {
       main: '#66bb6a',

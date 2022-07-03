@@ -18,6 +18,7 @@ import { orderReducer, ORDERS_INITIAL_STATE } from "../context/orders";
 import GetOut from "../components/ui/GetOut";
 import * as XLSX from "xlsx";
 import DownloadIcon from '@mui/icons-material/Download';
+import { fontWeight } from '@mui/system';
 
 
 interface Column {
@@ -286,7 +287,7 @@ const Orders = () => {
                         <TableCell
                           key={column.id}
                           align={column.align}
-                          style={{ minWidth: column.minWidth }}
+                          style={{ minWidth: column.minWidth, fontWeight: 700, fontSize: 16, background: '#54acde', color: '#fff' }}
                         >
                           {column.label}
                         </TableCell>

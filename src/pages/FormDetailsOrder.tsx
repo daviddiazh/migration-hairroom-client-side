@@ -242,7 +242,7 @@ export const FormDetailsOrder = () => {
                 }}
               >
                 <Grid>
-                  <LinkRRD to="/newOrder">
+                  <LinkRRD to="/newOrder" className="withoutUnderline">
                     <Link
                       display="flex"
                       alignItems="center"
