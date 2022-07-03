@@ -179,6 +179,10 @@ export const FormDetailsOrder = () => {
                       value: 3,
                       message: 'Debe de tener un mínimo de 3 caracteres.',
                     },
+                    maxLength: {
+                      value: 45,
+                      message: 'Superaste el límite de caracteres, debe tener máximo 45.'
+                    }
                   })
                 }
                 error={ !!errors.service }
@@ -193,7 +197,16 @@ export const FormDetailsOrder = () => {
                 variant="filled"
                 fullWidth
                 {
-                  ...register('product')
+                  ...register('product', {
+                    minLength: {
+                      value: 3,
+                      message: 'Debe de tener un mínimo de 3 caracteres.'
+                    },
+                    maxLength: {
+                      value: 45,
+                      message: 'Superaste el límite de caracteres, debe tener máximo 45.'
+                    }
+                  })
                 }
                 error={ !!errors.product }
                 helperText={ errors.product?.message }

@@ -98,164 +98,183 @@ const NewOrder = () => {
 
             <LayoutOrders>
                 <form onSubmit={handleSubmit(onSaveData)} noValidate>
-                <Box sx={{ width: 350, padding: "10px 20px", margin: "0 auto" }}>
-                    <Typography
-                        variant="h2"
-                        fontWeight={600}
-                        fontSize="30px"
+                    <Box sx={{ width: 350, padding: "10px 20px", margin: "0 auto" }}>
+                        <Typography
+                            variant="h2"
+                            fontWeight={600}
+                            fontSize="30px"
+                            textAlign="center"
+                            marginBottom={1}
+                        >
+                            Registro de órdenes
+                        </Typography>
+                        <Typography
+                        variant="h6"
+                        fontWeight={400}
+                        fontSize="23px"
                         textAlign="center"
-                        marginBottom={1}
-                    >
-                        Registro de órdenes
-                    </Typography>
-                    <Typography
-                    variant="h6"
-                    fontWeight={400}
-                    fontSize="23px"
-                    textAlign="center"
-                    marginBottom={8}
-                    >   
-                        Datos personales
-                    </Typography>
-                    <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                        marginBottom: "8%",
-                        marginTop: "-12%",
-                    }}
-                    >
-                    <Avatar sx={{ bgcolor: blue[500] }}>1</Avatar>
-                    <hr style={{ width: "255px", height: "2px", margin: "auto 0" }} />
-                    <Avatar sx={{ bgcolor: blue[500], opacity: 0.3 }}>2</Avatar>
+                        marginBottom={8}
+                        >   
+                            Datos personales
+                        </Typography>
+                        <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "space-around",
+                            marginBottom: "8%",
+                            marginTop: "-12%",
+                        }}
+                        >
+                        <Avatar sx={{ bgcolor: blue[500] }}>1</Avatar>
+                        <hr style={{ width: "255px", height: "2px", margin: "auto 0" }} />
+                        <Avatar sx={{ bgcolor: blue[500], opacity: 0.3 }}>2</Avatar>
+                        </Box>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="Nombre"
+                                    autoComplete="off"
+                                    type="text"
+                                    variant="filled"
+                                    fullWidth
+                                    defaultValue={localStorage.getItem("name")}
+                                    {...register("name", {
+                                        required: "Este campo es requerido",
+                                        minLength: {
+                                        value: 3,
+                                        message: "Debe de tener un mínimo de 3 caracteres.",
+                                        },
+                                        maxLength: {
+                                        value: 25,
+                                        message: 'Superaste el límite de caracteres, debe tener máximo 25.'
+                                        }
+                                    })}
+                                    error={!!errors.name}
+                                    helperText={errors.name?.message}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="Apellidos"
+                                    autoComplete="off"
+                                    type="text"
+                                    variant="filled"
+                                    fullWidth
+                                    defaultValue={localStorage.getItem("lastName")}
+                                    {...register("lastName", {
+                                        required: "Este campo es requerido",
+                                        minLength: {
+                                        value: 3,
+                                        message: "Debe de tener un mínimo de 3 caracteres.",
+                                        },
+                                        maxLength: {
+                                        value: 25,
+                                        message: 'Superaste el límite de caracteres, debe tener máximo 25.'
+                                        }
+                                    })}
+                                    error={!!errors.lastName}
+                                    helperText={errors.lastName?.message}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="Celular"
+                                    autoComplete="off"
+                                    type="number"
+                                    variant="filled"
+                                    fullWidth
+                                    defaultValue={localStorage.getItem("phone")}
+                                    {...register("phone", {
+                                        required: "Este campo es requerido",
+                                        validate: (value) => validations.isNumberPhone(value),
+                                        minLength: {
+                                            value: 10,
+                                            message: "Debe de tener un mínimo de 10 caracteres.",
+                                        },
+                                        maxLength: {
+                                        value: 15,
+                                        message: 'Superaste el límite de caracteres, debe tener máximo 15.'
+                                        }
+                                    })}
+                                    error={!!errors.phone}
+                                    helperText={errors.phone?.message}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="Email"
+                                    autoComplete="off"
+                                    type="email"
+                                    variant="filled"
+                                    fullWidth
+                                    defaultValue={localStorage.getItem("email")}
+                                    {...register("email", {
+                                        //validate: (value) => validations.isEmail(value),
+                                    })}
+                                    error={!!errors.email}
+                                    helperText={errors.email?.message}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    label="Número de Identificación"
+                                    autoComplete="off"
+                                    type="string"
+                                    variant="filled"
+                                    fullWidth
+                                    defaultValue={localStorage.getItem("numberIdentification")}
+                                    {...register("numberIdentification", {
+                                        required: "Este campo es requerido",
+                                        minLength: {
+                                            value: 4,
+                                            message: "Debe de tener un mínimo de 4 caracteres.",
+                                        },
+                                        maxLength: {
+                                        value: 15,
+                                        message: 'Superaste el límite de caracteres, debe tener máximo 15.'
+                                        }
+                                    })}
+                                    error={!!errors.numberIdentification}
+                                    helperText={errors.numberIdentification?.message}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <FormControl>
+                                <FormLabel>Tipo de Documento:</FormLabel>
+                                <RadioGroup
+                                    row
+                                    value={typeDoc}
+                                    onChange={onTypeDocumentChanged}
+                                    defaultValue={localStorage.getItem("typeIdentification")}
+                                >
+                                    {typeDocument.map((document) => (
+                                    <FormControlLabel
+                                        key={document}
+                                        value={document}
+                                        control={<Radio />}
+                                        label={capitalize(document)}
+                                    />
+                                    ))}
+                                </RadioGroup>
+                                </FormControl>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button
+                                    className="circular-btn"
+                                    size="large"
+                                    type="submit"
+                                    disabled={ !isValid || !touched }
+                                    sx={{ backgroundColor: 'secondary.main',
+                                            '&:hover': {
+                                                backgroundColor: 'info.main',
+                                            }, 
+                                        }}
+                                >
+                                    Siguiente
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </Box>
-                    <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <TextField
-                        label="Nombre"
-                        autoComplete="off"
-                        type="text"
-                        variant="filled"
-                        fullWidth
-                        style={{ height: "50px"}}
-                        defaultValue={localStorage.getItem("name")}
-                        {...register("name", {
-                            required: "Este campo es requerido",
-                            minLength: {
-                            value: 3,
-                            message: "Debe de tener un mínimo de 3 caracteres.",
-                            },
-                        })}
-                        error={!!errors.name}
-                        helperText={errors.name?.message}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                        label="Apellidos"
-                        autoComplete="off"
-                        type="text"
-                        variant="filled"
-                        fullWidth
-                        defaultValue={localStorage.getItem("lastName")}
-                        {...register("lastName", {
-                            required: "Este campo es requerido",
-                            minLength: {
-                            value: 3,
-                            message: "Debe de tener un mínimo de 3 caracteres.",
-                            },
-                        })}
-                        error={!!errors.lastName}
-                        helperText={errors.lastName?.message}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                        label="Celular"
-                        autoComplete="off"
-                        type="number"
-                        variant="filled"
-                        fullWidth
-                        defaultValue={localStorage.getItem("phone")}
-                        {...register("phone", {
-                            required: "Este campo es requerido",
-                            validate: (value) => validations.isNumberPhone(value),
-                            minLength: {
-                            value: 10,
-                            message: "Debe de tener un mínimo de 10 caracteres.",
-                            },
-                        })}
-                        error={!!errors.phone}
-                        helperText={errors.phone?.message}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                        label="Email"
-                        autoComplete="off"
-                        type="email"
-                        variant="filled"
-                        fullWidth
-                        defaultValue={localStorage.getItem("email")}
-                        {...register("email", {
-                            //validate: (value) => validations.isEmail(value),
-                        })}
-                        error={!!errors.email}
-                        helperText={errors.email?.message}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                        label="Número de Identificación"
-                        autoComplete="off"
-                        type="string"
-                        variant="filled"
-                        fullWidth
-                        defaultValue={localStorage.getItem("numberIdentification")}
-                        {...register("numberIdentification", {
-                            required: "Este campo es requerido",
-                        })}
-                        error={!!errors.numberIdentification}
-                        helperText={errors.numberIdentification?.message}
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <FormControl>
-                        <FormLabel>Tipo de Documento:</FormLabel>
-                        <RadioGroup
-                            row
-                            value={typeDoc}
-                            onChange={onTypeDocumentChanged}
-                            defaultValue={localStorage.getItem("typeIdentification")}
-                        >
-                            {typeDocument.map((document) => (
-                            <FormControlLabel
-                                key={document}
-                                value={document}
-                                control={<Radio />}
-                                label={capitalize(document)}
-                            />
-                            ))}
-                        </RadioGroup>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button
-                        className="circular-btn"
-                        size="large"
-                        type="submit"
-                        disabled={ !isValid || !touched }
-                        sx={{ backgroundColor: 'secondary.main',
-                                '&:hover': {
-                                    backgroundColor: 'info.main',
-                                }, 
-                            }}
-                        >
-                        Siguiente
-                        </Button>
-                    </Grid>
-                    </Grid>
-                </Box>
                 </form>
             </LayoutOrders>
         </div>

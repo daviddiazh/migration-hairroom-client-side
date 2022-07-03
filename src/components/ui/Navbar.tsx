@@ -95,7 +95,7 @@ export const Navbar: FC = () => {
                 <Link style={{ cursor: "pointer" }}>
                   Pedido
                   <IconButton>
-                    <Badge badgeContent={1} color="secondary">
+                    <Badge badgeContent={1} color="info">
                       <ShoppingCartOutlined />
                     </Badge>
                   </IconButton>
