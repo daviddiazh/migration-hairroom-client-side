@@ -274,7 +274,7 @@ const Orders = () => {
             <Box display='flex' justifyContent='space-between' margin='17px 2.5em'>
               <Box></Box>
 
-              <Button color='success' onClick={onDownloadXlsx} sx={{padding: '5px 30px', color: '#fff', fontSize: '16px'}}>Exportar {<DownloadIcon />}</Button>
+              <Button color='success' onClick={onDownloadXlsx} sx={{padding: '5px 30px', color: '#fff', fontSize: '16px', '&:hover': {backgroundColor: '#56b05a',},}}>Exportar {<DownloadIcon />}</Button>
             </Box>
 
             <Paper sx={{ width: '97%', margin: '0 auto', overflow: 'hidden' }}>
