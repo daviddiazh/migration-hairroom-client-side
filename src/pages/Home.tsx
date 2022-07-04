@@ -6,13 +6,13 @@ import { useEffect } from 'react';
 
 const Home = () => {
 
-  // useEffect(() => {
-  //   const disableButton = window.oncontextmenu = () => {
-  //     return false
-  //   }
+  useEffect(() => {
+    const disableButton = window.oncontextmenu = () => {
+      return false
+    }
 
-  //   disableButton();
-  // }, [])
+    disableButton();
+  }, [])
 
   return (
     <div>

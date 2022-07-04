@@ -1,4 +1,4 @@
-import { FC, useEffect, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { IUser } from '../../interfaces/User';
 import { AuthContext, authReducer } from './';
 import authApi from '../../api/authApi';
@@ -40,11 +40,8 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
             const { data } = await authApi.get('/validate-token', config);
             const { name, role } = data;
             console.log('data: ', data)
-            //localStorage.setItem('token', token);
-            //localStorage.setItem('TOKEN-USER', token);
             dispatch({ type: 'Auth - Login', payload: {name, role} });
         } catch (error) {
-            //localStorage.removeItem('token');
             console.log(error)
         }
     }
@@ -81,7 +78,6 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
             if( axios.isAxiosError( error ) ){
                 return{
                     hasError: true,
-                    //message: error.response?.data.message
                 }
             }
 
@@ -95,7 +91,6 @@ export const AuthProvider: React.FC<any> = ({ children }) => {
 
     const logout = () => {
         localStorage.removeItem('TOKEN-USER');
-        //router.reload();
     }
 
 

@@ -1,5 +1,5 @@
-import React, { FC, useContext, useEffect } from "react";
-import { Link as LinkRRD, useNavigate } from 'react-router-dom'
+import React, { FC, useContext } from "react";
+import { Link as LinkRRD } from 'react-router-dom'
 import {
   AppBar,
   Avatar,
@@ -23,14 +23,11 @@ import imagePath from '../../images/Logo.png';
 
 export const Navbar: FC = () => {
   const { user, isLoggedIn, logout } = useContext(AuthContext);
-  //let navigate = useNavigate()
-
   
   const onLogout = () => {
     
     logout()
-    
-    // navigate('/');
+ 
     window.location.reload();
     
   }
@@ -43,12 +40,7 @@ export const Navbar: FC = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
-  // useEffect(() => {
-  //   if( localStorage.getItem('token') !== undefined && !user ){
-  //     console.log('GUARDANDO EL TOKEN')
-  //   }
-  // }, [])
+
   
   return (
     <AppBar>
@@ -59,8 +51,6 @@ export const Navbar: FC = () => {
             alignItems="center"
             style={{ cursor: "pointer" }}
           >
-            {/* <Typography variant="h6">Peluqueria |</Typography>
-            <Typography sx={{ ml: 0.5 }}>App</Typography> */}
             <img
               src={imagePath}
               alt="Logo de la App"
@@ -105,58 +95,58 @@ export const Navbar: FC = () => {
           )
         }
 
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        MenuListProps={{
-          'aria-labelledby': 'basic-button',
-        }}
-      >
-        <MenuItem onClick={handleClose}>
-          <LinkRRD to="/admin/orders" className="withoutUnderline">
-            <Link
-              display="flex"
-              alignItems="center"
-              style={{ cursor: "pointer" }}
-              //underline='always'
-              textAlign='center'
-              sx={{ pt: 1, pb: 1}}
-            >
-              <Typography 
-                sx={{ ml: 0.5}}
+        <Menu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}
+        >
+          <MenuItem onClick={handleClose}>
+            <LinkRRD to="/admin/orders" className="withoutUnderline">
+              <Link
+                display="flex"
+                alignItems="center"
+                style={{ cursor: "pointer" }}
+                //underline='always'
                 textAlign='center'
-                marginRight={1}
+                sx={{ pt: 1, pb: 1}}
               >
-                  Ordenes
-              </Typography>
-              <ListIcon />
-            </Link>
-          </LinkRRD>
-        </MenuItem>
-        <MenuItem onClick={handleClose}>{
-          isLoggedIn && (
-            <Box sx={{ mr: -6 }}>
-              <ListItem button onClick={ onLogout } 
-              sx={{
-                    '&:hover': {
-                        backgroundColor: '#f5f5f5',
-                    }, 
-                }}
-              >
-                <span style={{ marginRight: 10 }}>Salir</span>
-                
-                <LoginOutlined/>
+                <Typography 
+                  sx={{ ml: 0.5}}
+                  textAlign='center'
+                  marginRight={1}
+                >
+                    Ordenes
+                </Typography>
+                <ListIcon />
+              </Link>
+            </LinkRRD>
+          </MenuItem>
+          <MenuItem onClick={handleClose}>{
+            isLoggedIn && (
+              <Box sx={{ mr: -6 }}>
+                <ListItem button onClick={ onLogout } 
+                sx={{
+                      '&:hover': {
+                          backgroundColor: '#f5f5f5',
+                      }, 
+                  }}
+                >
+                  <span style={{ marginRight: 10 }}>Salir</span>
+                  
+                  <LoginOutlined/>
 
-                <span style={{ marginRight: 30 }}></span>
-              </ListItem>
-            </Box>
+                  <span style={{ marginRight: 30 }}></span>
+                </ListItem>
+              </Box>
 
-          )
-        }</MenuItem>
-      </Menu>
-        
+            )
+          }</MenuItem>
+        </Menu>
+
       </Toolbar>
     </AppBar>
   );

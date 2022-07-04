@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import {
   Avatar,
-  Badge,
   Box,
   Button,
   capitalize,
@@ -9,20 +8,14 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
-  Link,
   Radio,
   RadioGroup,
   TextField,
   Typography,
 } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useRadioGroup } from "@mui/material/RadioGroup";
 import { useForm } from "react-hook-form";
-import { ErrorOutline } from "@mui/icons-material";
 import { LayoutOrders } from "../components/layouts/LayoutOrders";
 import { blue } from "@mui/material/colors";
-import { OrderContext } from "../context/orders/OrderContext";
-import { Link as LinkRRD, Navigate } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { validations } from "../utils";
 import GetOut from '../components/ui/GetOut';
@@ -95,7 +88,6 @@ const NewOrder = () => {
     return (
         <div>
             <GetOut />
-
             <LayoutOrders>
                 <form onSubmit={handleSubmit(onSaveData)} noValidate>
                     <Box sx={{ width: 350, padding: "10px 20px", margin: "0 auto" }}>
@@ -240,22 +232,22 @@ const NewOrder = () => {
                             </Grid>
                             <Grid item xs={12}>
                                 <FormControl>
-                                <FormLabel>Tipo de Documento:</FormLabel>
-                                <RadioGroup
-                                    row
-                                    value={typeDoc}
-                                    onChange={onTypeDocumentChanged}
-                                    defaultValue={localStorage.getItem("typeIdentification")}
-                                >
-                                    {typeDocument.map((document) => (
-                                    <FormControlLabel
-                                        key={document}
-                                        value={document}
-                                        control={<Radio />}
-                                        label={capitalize(document)}
-                                    />
-                                    ))}
-                                </RadioGroup>
+                                    <FormLabel>Tipo de Documento:</FormLabel>
+                                    <RadioGroup
+                                        row
+                                        value={typeDoc}
+                                        onChange={onTypeDocumentChanged}
+                                        defaultValue={localStorage.getItem("typeIdentification")}
+                                    >
+                                        {typeDocument.map((document) => (
+                                            <FormControlLabel
+                                                key={document}
+                                                value={document}
+                                                control={<Radio />}
+                                                label={capitalize(document)}
+                                            />
+                                        ))}
+                                    </RadioGroup>
                                 </FormControl>
                             </Grid>
                         </Grid>

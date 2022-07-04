@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { AuthContext } from '../context/auth'
-import { Box, Link, Typography } from '@mui/material';
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import { Box, Typography } from '@mui/material';
 import { Layout } from '../components/layouts/Layout';
 
 

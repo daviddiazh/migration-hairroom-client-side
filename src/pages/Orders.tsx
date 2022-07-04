@@ -1,5 +1,4 @@
-import { useEffect, useReducer } from 'react';
-import React, { useContext } from "react";
+import React, { useEffect, useReducer, useContext } from 'react';
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,8 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { Order } from "../interfaces/Order";
-import { Box, Button, Icon, Link, Typography } from "@mui/material";
-import { v4 as uuidv4 } from "uuid";
+import { Box, Button, Typography } from "@mui/material";
 import { AuthContext } from '../context/auth/AuthContext';
 import { Footer } from "../components/ui/Footer";
 import ordersApi from "../api/ordersApi";
@@ -18,7 +16,6 @@ import { orderReducer, ORDERS_INITIAL_STATE } from "../context/orders";
 import GetOut from "../components/ui/GetOut";
 import * as XLSX from "xlsx";
 import DownloadIcon from '@mui/icons-material/Download';
-import { fontWeight } from '@mui/system';
 
 
 interface Column {

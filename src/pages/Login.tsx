@@ -1,10 +1,8 @@
 import React, { useContext, useState } from 'react'
 import AuthLayout from '../components/layouts/AuthLayout';
 import { Box, Button, Chip, Grid, Link, TextField, Typography } from '@mui/material';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useForm } from 'react-hook-form';
 import { validations } from '../utils';
-import authApi from '../api/authApi';
 import { ErrorOutline } from '@mui/icons-material';
 import { AuthContext } from '../context/auth/AuthContext';
 import { Link as LinkRRD, Navigate, useNavigate } from 'react-router-dom';
@@ -18,7 +16,7 @@ type FormData = {
 const Login = () => {
 
     const navigate = useNavigate();
-    const { loginUser, isLoggedIn, user } = useContext( AuthContext );
+    const { loginUser } = useContext( AuthContext );
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
     const [showError, setShowError] = useState(false);
 
