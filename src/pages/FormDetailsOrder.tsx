@@ -4,8 +4,6 @@ import {
   Box,
   Button,
   capitalize,
-  Checkbox,
-  Chip,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -18,15 +16,14 @@ import {
 } from "@mui/material";
 import { LayoutOrders } from "../components/layouts/LayoutOrders";
 import { blue } from "@mui/material/colors";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import SaveIcon from '@mui/icons-material/Save';
 import { OrderContext } from '../context/orders';
 import { useForm } from "react-hook-form";
 import { useNavigate, Link as LinkRRD } from 'react-router-dom';
 import { validations } from "../utils";
-import { useEffect } from 'react';
 import GetOut from "../components/ui/GetOut";
+import { Loading } from "../components/ui/Loading";
 
 
 type FormData = {
@@ -59,6 +56,7 @@ export const FormDetailsOrder = () => {
 
   const [typePay, setTypePay] = useState('');
   const [touched, setTouched] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   let navigate = useNavigate();
 
@@ -67,9 +65,6 @@ export const FormDetailsOrder = () => {
     setTypePay(event.target.value);
     setTouched(true)
   };
-
-  const [showError, setShowError] = useState(false);
-
 
   const dataOrder = {
     nameStorage: '',
@@ -96,11 +91,11 @@ export const FormDetailsOrder = () => {
     price,
     paymentMethod,}: FormData) => {
 
-    setShowError(false);
-
     getLocalStorage();
 
     console.log({ dataOrder })
+
+    setLoading(true);
 
     const isValidData = await addOrder( dataOrder.nameStorage!,
       dataOrder.lastNameStorage!,
@@ -121,8 +116,10 @@ export const FormDetailsOrder = () => {
       localStorage.removeItem('lastName');
       localStorage.removeItem('phone');
       localStorage.removeItem('email');
-      //TODO: navegar a otra página privada
-      navigate('/')
+      
+      navigate('/');
+      
+      setLoading(false)
       
     }
         
@@ -132,6 +129,9 @@ export const FormDetailsOrder = () => {
   return (
     <div>
       <GetOut />
+      {
+        loading ? ( <Loading /> ) : null
+      }
       <LayoutOrders>
         <form onSubmit={ handleSubmit(onSaveData) }>
           <Box sx={{ width: 350, padding: "10px 20px", margin: "0 auto" }}>
