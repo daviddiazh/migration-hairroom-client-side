@@ -16,109 +16,10 @@ import { orderReducer, ORDERS_INITIAL_STATE } from "../context/orders";
 import GetOut from "../components/ui/GetOut";
 import * as XLSX from "xlsx";
 import DownloadIcon from '@mui/icons-material/Download';
+import { columns } from '../utils/columns';
+import { Data } from '../interfaces/Data';
+import { Datos } from '../interfaces/Datos';
 
-
-interface Column {
-  id:
-    | "createdAt"
-    | "name"
-    | "lastName"
-    | "typeIdentification"
-    | "numberIdentification"
-    | "phone"
-    | "email"
-    | "service"
-    | "product"
-    | "price"
-    | "paymentMethod";
-  label: string;
-  minWidth?: number;
-  align?: "right";
-  format?: (value: number) => string;
-}
-
-const columns: readonly Column[] = [
-  { id: "createdAt", label: "Fecha del Pedido", minWidth: 20 },
-  { id: "name", label: "Nombre", minWidth: 100 },
-  { id: "lastName", label: "Apellido", minWidth: 100 },
-  {
-    id: "typeIdentification",
-    label: "Tipo de Documento",
-    minWidth: 50,
-    align: "right",
-  },
-  {
-    id: "numberIdentification",
-    label: "Número de Documento",
-    minWidth: 50,
-    align: "right",
-  },
-  {
-    id: "phone",
-    label: "Celular",
-    minWidth: 170,
-    align: "right",
-    format: (value: number) => value.toFixed(0),
-  },
-  {
-    id: "email",
-    label: "Correo Eléctronico",
-    minWidth: 100,
-    align: "right",
-  },
-  {
-    id: "service",
-    label: "Servicio",
-    minWidth: 150,
-    align: "right",
-  },
-  {
-    id: "product",
-    label: "Producto",
-    minWidth: 150,
-    align: "right",
-  },
-  {
-    id: "price",
-    label: "Precio",
-    minWidth: 20,
-    align: "right",
-  },
-  {
-    id: "paymentMethod",
-    label: "Método de Pago",
-    minWidth: 50,
-    align: "right",
-  },
-];
-
-interface Data {
-  createdAt: string;
-  name: string;
-  lastName: string;
-  phone: number;
-  email: string;
-  numberIdentification: string;
-  typeIdentification: string;
-  service: string;
-  product: string;
-  price: number;
-  paymentMethod: string;
-}
-
-interface Datos {
-  Fecha: string;
-  Nombre: string;
-  Apellido: string;
-  Celular: number;
-  Correo: string;
-  Número_Identificación: string;
-  Tipo_Identificación: string;
-  Servicio: string;
-  Producto: string;
-  Precio: number;
-  Método_Pago: string;
-}
 
 function createData(
   createdAt: string,
@@ -148,7 +49,7 @@ function createData(
   };
 }
 
-function crearFila(
+function createRow(
   Fecha: string,
   Nombre: string,
   Apellido: string,
@@ -178,6 +79,7 @@ function crearFila(
 
 
 const Orders = () => {
+
   const [ orders, setOrders ] = React.useState<Order[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -214,9 +116,9 @@ const Orders = () => {
     );
   });
 
-  // Esto es lo que se exporta
+  // This is the export data
   const filas = orders.map((order) => {
-    return crearFila(
+    return createRow(
       new Date(order.createdAt!).toLocaleDateString() +
         " - " +
         new Date(order.createdAt!).toLocaleTimeString(),
@@ -337,6 +239,7 @@ const Orders = () => {
       <Footer />
     </>
   );
+
 };
 
 
