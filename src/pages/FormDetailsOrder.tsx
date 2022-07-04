@@ -165,69 +165,72 @@ export const FormDetailsOrder = () => {
               <hr style={{ width: '255px', height: '2px', margin: 'auto 0' }}/>
               <Avatar sx={{ bgcolor: blue[500] }}>2</Avatar>
             </Box>
-            <Grid item xs={12}>
-              <TextField
-                label="Servicio"
-                autoComplete="off"
-                type="text"
-                variant="filled"
-                fullWidth
-                {
-                  ...register('service', {
-                    required: 'Este campo es requerido',
-                    minLength: {
-                      value: 3,
-                      message: 'Debe de tener un mínimo de 3 caracteres.',
-                    },
-                    maxLength: {
-                      value: 45,
-                      message: 'Superaste el límite de caracteres, debe tener máximo 45.'
-                    }
-                  })
-                }
-                error={ !!errors.service }
-                helperText={ errors.service?.message }
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Producto"
-                autoComplete="off"
-                type="text"
-                variant="filled"
-                fullWidth
-                {
-                  ...register('product', {
-                    minLength: {
-                      value: 3,
-                      message: 'Debe de tener un mínimo de 3 caracteres.'
-                    },
-                    maxLength: {
-                      value: 45,
-                      message: 'Superaste el límite de caracteres, debe tener máximo 45.'
-                    }
-                  })
-                }
-                error={ !!errors.product }
-                helperText={ errors.product?.message }
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Precio"
-                autoComplete="off"
-                type="number"
-                variant="filled"
-                fullWidth
-                {
-                  ...register('price', {
-                    required: 'Este campo es requerido',
-                    validate: (value) => validations.isPrice(value)
-                  })
-                }
-                error={ !!errors.price }
-                helperText={ errors.price?.message }
-              />
+            
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextField
+                  label="Servicio"
+                  autoComplete="off"
+                  type="text"
+                  variant="filled"
+                  fullWidth
+                  {
+                    ...register('service', {
+                      required: 'Este campo es requerido',
+                      minLength: {
+                        value: 3,
+                        message: 'Debe de tener un mínimo de 3 caracteres.',
+                      },
+                      maxLength: {
+                        value: 45,
+                        message: 'Superaste el límite de caracteres, debe tener máximo 45.'
+                      }
+                    })
+                  }
+                  error={ !!errors.service }
+                  helperText={ errors.service?.message }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Producto"
+                  autoComplete="off"
+                  type="text"
+                  variant="filled"
+                  fullWidth
+                  {
+                    ...register('product', {
+                      minLength: {
+                        value: 3,
+                        message: 'Debe de tener un mínimo de 3 caracteres.'
+                      },
+                      maxLength: {
+                        value: 45,
+                        message: 'Superaste el límite de caracteres, debe tener máximo 45.'
+                      }
+                    })
+                  }
+                  error={ !!errors.product }
+                  helperText={ errors.product?.message }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  label="Precio"
+                  autoComplete="off"
+                  type="number"
+                  variant="filled"
+                  fullWidth
+                  {
+                    ...register('price', {
+                      required: 'Este campo es requerido',
+                      validate: (value) => validations.isPrice(value)
+                    })
+                  }
+                  error={ !!errors.price }
+                  helperText={ errors.price?.message }
+                />
+              </Grid>
               <Grid item xs={12}>
                 <FormControl sx={{ mt: 3 }}>
                   <FormLabel>Metodo de Pago:</FormLabel>
@@ -247,6 +250,7 @@ export const FormDetailsOrder = () => {
                   </RadioGroup>
                 </FormControl>
               </Grid>
+            </Grid>
               <Box
                 sx={{
                   display: "flex",
@@ -283,7 +287,7 @@ export const FormDetailsOrder = () => {
                   </Button>
                 </Grid>
               </Box>
-            </Grid>
+
           </Box>
         </form>
       </LayoutOrders>

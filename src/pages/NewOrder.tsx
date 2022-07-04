@@ -258,22 +258,26 @@ const NewOrder = () => {
                                 </RadioGroup>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={12}>
-                                <Button
-                                    className="circular-btn"
-                                    size="large"
-                                    type="submit"
-                                    disabled={ !isValid || !touched }
-                                    sx={{ backgroundColor: 'secondary.main',
-                                            '&:hover': {
-                                                backgroundColor: 'info.main',
-                                            }, 
-                                        }}
-                                >
-                                    Siguiente
-                                </Button>
-                            </Grid>
                         </Grid>
+                        <Box 
+                            display="flex"
+                            justifyContent="space-between" marginTop={2.5}
+                        >
+                            <div></div>
+                            <Button
+                                className="circular-btn"
+                                size="large"
+                                type="submit"
+                                disabled={ !isValid || !touched }
+                                sx={{ backgroundColor: 'secondary.main',
+                                        '&:hover': {
+                                            backgroundColor: 'info.main',
+                                        }, 
+                                    }}
+                            >
+                                Siguiente
+                            </Button>
+                        </Box>
                     </Box>
                 </form>
             </LayoutOrders>
